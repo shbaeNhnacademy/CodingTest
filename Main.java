@@ -16,19 +16,8 @@ public class Main {
             int start = scanner.nextInt() - 1;
             int end = scanner.nextInt() - 1;
             int sum = 0;
-            boolean isStart = false;
-            for (int j = 0; j < ints.length; j++) {
-                if (j == start) {
-                    isStart = true;
-                } else if (j == end) {
-                    sum += ints[j];
-                    break;
-                }
-                
-                if (isStart) {
-                    sum += ints[j];
-                }
-
+            for (int j = start; j <= end; j++) {
+                sum += ints[j];
             }
             sb.append(sum + "\n");
         }
