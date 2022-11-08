@@ -17,7 +17,6 @@ public class Main {
         for (int i = 1; i <= str2.length; i++) {
             accInts[i] = accInts[i - 1] + Integer.parseInt(str2[i-1]);
         }
-        System.out.println(Arrays.toString(accInts));
         
         
         StringBuilder sb = new StringBuilder();
