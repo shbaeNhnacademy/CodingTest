@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * 투 포인터 문제 - target은 고정되어 있고 포인터 두개가 양쪽에서 범위를 좁혀 들어오면서 target 찾기
+ */
+
 public class Main {
     public static void main(String[] args) throws NumberFormatException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -12,37 +16,33 @@ public class Main {
         for (int i = 0; i < strs1.length; i++) {
             a[i] = Integer.parseInt(strs1[i]);
         }
-
         Arrays.sort(a);
-
-        // int count = 0;
-        Set<Integer> set = new HashSet<>();
+        int count = 0;
         for (int i = 0; i < a.length; i++) {
-            if (set.contains(a[i])) {
-                continue;
+            if (a.length <= 2) {
+                break;
             }
-            // System.out.println("###" + a[i]);
-            for (int j = 0; j < a.length; j++) {
-                if (a[j] >= a[i]) {
-                    break;
-                }
-                // System.out.println("#### " + a[j]);
-                for (int z = j + 1; z < a.length; z++) {
-                    if (set.contains(a[i])) {
+            int target = a[i];
+            int startIdx = 0;
+            int endIdx = a.length - 1;
+
+            while (startIdx < endIdx) {
+                if (a[startIdx] + a[endIdx] == target) {
+                    if (i != startIdx && i != endIdx) {
+                        count++;
                         break;
+                    } else if (startIdx == i) {
+                        startIdx++;
+                    } else if (endIdx == i) {
+                        endIdx--;
                     }
-                    // System.out.println(a[j] + " + " + a[z] + " = " + a[i]);
-                    // count++;
-                    if (a[j] + a[z] == a[i] && a[j] != a[z]) {
-                        set.add(a[i]);
-                        break;
-                    }
+                } else if (a[startIdx] + a[endIdx] > target) {
+                    endIdx--;
+                } else {
+                    startIdx++;
                 }
             }
         }
-        // System.out.println(count);
-        // System.out.println(set);
-
-        System.out.println(set.size());
+        System.out.println(count);
     }
 }
