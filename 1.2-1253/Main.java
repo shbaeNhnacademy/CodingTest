@@ -7,21 +7,18 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
 
-        int n = Integer.parseInt(br.readLine());
-
-        String[] strs1 = br.readLine().split(" ");
+        int n = sc.nextInt();
         int[] a = new int[n];
-        for (int i = 0; i < strs1.length; i++) {
-            a[i] = Integer.parseInt(strs1[i]);
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
         }
+
         Arrays.sort(a);
+
         int count = 0;
         for (int i = 0; i < a.length; i++) {
-            if (a.length <= 2) {
-                break;
-            }
             int target = a[i];
             int startIdx = 0;
             int endIdx = a.length - 1;
@@ -31,9 +28,9 @@ public class Main {
                     if (i != startIdx && i != endIdx) {
                         count++;
                         break;
-                    } else if (startIdx == i) {
+                    } else if (i == startIdx) {
                         startIdx++;
-                    } else if (endIdx == i) {
+                    } else if (i == endIdx) {
                         endIdx--;
                     }
                 } else if (a[startIdx] + a[endIdx] > target) {
